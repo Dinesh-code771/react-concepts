@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import "../Styles/List.css";
+import SingleList from "./SingleList";
 export default function List() {
-  const [emps, setemps] = useState([
-    { name: "John", age: 25 },
-    { name: "Doe2.0", age: 30 },
-    { name: "Jane2.0", age: 35 },
-    { name: "Doe", age: 30 },
-    { name: "Jane", age: 35 },
-  ]);
+  const [emps, setemps] = useState([]);
   const [newName, setNewName] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+      const data = await response.json();
+      setemps(data);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
 
   return (
     <div className="listContainer">
@@ -44,26 +51,23 @@ export default function List() {
         </button>
       </div>
 
-      <ul className="lists">
-        {emps.map((emp, index) => (
-          <div className="listWrapper">
-            <li className="list" key={emp.name}>
-              {emp.name} - {emp.age}
-            </li>
-            <button
-              className="deleteButton"
-              onClick={() => {
-                const newEmps = emps.filter(
-                  (employe) => employe.name !== emp.name
-                );
-                setemps(newEmps);
-              }}
-            >
-              Delete
-            </button>
-          </div>
-        ))}
-      </ul>
+      {isLoading ? (
+        <span className="loader"></span>
+      ) : (
+        <ul className="lists">
+          {emps.map((emp, index) => (
+            <div className="listWrapper">
+              <SingleList
+                key={index}
+                emp={emp}
+                emps={emps}
+                setemps={setemps}
+
+              />
+            </div>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

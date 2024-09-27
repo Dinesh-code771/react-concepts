@@ -6,6 +6,7 @@ import SideBar from "./Components/SideBar";
 import { useEffect, useState } from "react";
 import ConditionalCom from "./Components/ConditionalCom";
 import List from "./Components/List";
+import Memo from "./Components/Memo";
 function App() {
   return (
     <div

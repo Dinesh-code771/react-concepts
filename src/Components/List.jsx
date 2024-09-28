@@ -1,14 +1,15 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { useState } from "react";
 import "../Styles/List.css";
 import SingleList from "./SingleList";
 export default function List() {
   const [emps, setemps] = useState([]);
+  const inputRef = useRef(null);
   const [newName, setNewName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  //complext logic or logic that excute on a perticular  state
+  //complext logic or logic that excute on a perticularstate state
   const count = useMemo(() => {
- console.log("runnind")
+    console.log("runnind");
     return emps.length;
   }, [emps]);
 
@@ -24,6 +25,10 @@ export default function List() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   return (
     <div className="listContainer">
       <h1 className="listHeading">Names</h1>
@@ -31,6 +36,7 @@ export default function List() {
         {/* input feild */}
         <input
           type="text"
+          ref={inputRef}
           placeholder="Enter Name"
           className="input"
           value={newName}

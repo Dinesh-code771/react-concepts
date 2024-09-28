@@ -6,7 +6,7 @@ import SideBar from "./Components/SideBar";
 import { useEffect, useState } from "react";
 import ConditionalCom from "./Components/ConditionalCom";
 import List from "./Components/List";
-import Memo from "./Components/Memo";
+import FunctionMemo from "./Components/FunctionMemo";
 function App() {
   return (
     <div
@@ -20,7 +20,7 @@ function App() {
         alignItems: "center",
       }}
     >
-      <List />
+      <FunctionMemo />
     </div>
   );
 }

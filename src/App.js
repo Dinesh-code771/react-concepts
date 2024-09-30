@@ -7,21 +7,40 @@ import { useEffect, useState } from "react";
 import ConditionalCom from "./Components/ConditionalCom";
 import List from "./Components/List";
 import FunctionMemo from "./Components/FunctionMemo";
+import { createContext, useContext } from "react";
+import { useReducer } from "react";
+const initialState = { count: 0 };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { count: state.count + 1 };
+    case "decrement":
+      return { count: state.count - 1 };
+    default:
+      throw new Error();
+  }
+}
+export const DataContext = createContext();
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <div
-      style={{
-        backgroundColor: "black",
-        minHeight: "100vh",
-        color: "white",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <FunctionMemo />
-    </div>
+    <DataContext.Provider value={{ state, dispatch }}>
+      <div
+        style={{
+          backgroundColor: "black",
+          minHeight: "100vh",
+          color: "white",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <NavBar />
+        <List />
+      </div>
+    </DataContext.Provider>
   );
 }
 

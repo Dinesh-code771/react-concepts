@@ -2,11 +2,14 @@ import React, { useEffect, useMemo, useRef } from "react";
 import { useState } from "react";
 import "../Styles/List.css";
 import SingleList from "./SingleList";
+import { useReducer } from "react";
+
 export default function List() {
   const [emps, setemps] = useState([]);
   const inputRef = useRef(null);
   const [newName, setNewName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
   //complext logic or logic that excute on a perticularstate state
   const count = useMemo(() => {
     console.log("runnind");

@@ -1,6 +1,9 @@
 import React from "react";
 import { useState } from "react";
+import { DataContext } from "../App";
+import { useContext } from "react";
 export default function SingleList({ emp, emps, setemps }) {
+  const value = useContext(DataContext);
   const [isEdit, setIsEdit] = useState(false);
   const [newName, setNewName] = useState(emp.name);
   return (
@@ -17,7 +20,11 @@ export default function SingleList({ emp, emps, setemps }) {
           />
         ) : (
           emp.name
-        )}{" "}
+        )}
+        {value.state.count}
+        <button onClick={()=>{
+          value.dispatch({type:"increment"})
+        }}>+</button>
       </li>
       <button
         className="deleteButton"
@@ -37,12 +44,11 @@ export default function SingleList({ emp, emps, setemps }) {
               return {
                 ...employe,
                 name: newName,
-                
               };
             }
             return employe;
           });
-            setemps(newEmps);
+          setemps(newEmps);
         }}
       >
         {isEdit ? "Save" : "Edit"}

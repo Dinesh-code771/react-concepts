@@ -9,6 +9,10 @@ import List from "./Components/List";
 import FunctionMemo from "./Components/FunctionMemo";
 import { createContext, useContext } from "react";
 import { useReducer } from "react";
+import UserForm from "./Components/UserForm";
+import AdminForm from "./Components/adminForm";
+import Model from "./Components/Model";
+import DataDisplayWithLoading from "./Components/DataDisplay";
 const initialState = { count: 0 };
 
 function reducer(state, action) {
@@ -23,6 +27,7 @@ function reducer(state, action) {
 }
 export const DataContext = createContext();
 function App() {
+  const [showModal, setShowModal] = React.useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <DataContext.Provider value={{ state, dispatch }}>
@@ -37,8 +42,7 @@ function App() {
           alignItems: "center",
         }}
       >
-        <NavBar />
-        <List />
+        <DataDisplayWithLoading />
       </div>
     </DataContext.Provider>
   );

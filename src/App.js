@@ -12,7 +12,9 @@ import { useReducer } from "react";
 import UserForm from "./Components/UserForm";
 import AdminForm from "./Components/adminForm";
 import Model from "./Components/Model";
+import React from "react";
 import DataDisplayWithLoading from "./Components/DataDisplay";
+import { Outlet } from "react-router-dom";
 const initialState = { count: 0 };
 
 function reducer(state, action) {
@@ -27,24 +29,20 @@ function reducer(state, action) {
 }
 export const DataContext = createContext();
 function App() {
-  const [showModal, setShowModal] = React.useState(false);
-  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <DataContext.Provider value={{ state, dispatch }}>
-      <div
-        style={{
-          backgroundColor: "black",
-          minHeight: "100vh",
-          color: "white",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <DataDisplayWithLoading />
-      </div>
-    </DataContext.Provider>
+    <div
+      style={{
+        backgroundColor: "black",
+        minHeight: "100vh",
+        color: "white",
+        display: "flex",
+        flexDirection: "row",
+      }}
+    >
+      {/* <NavBar/> */}
+      <SideBar />
+      <Outlet />
+    </div>
   );
 }
 

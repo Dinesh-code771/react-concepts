@@ -1,26 +1,35 @@
 import React, { useState } from "react";
 import "../Styles/Component.css";
-export default function Counter(props) {
-// props.increment();
+import { useSelector, useDispatch } from "react-redux";
+import { decrement, increment, incrementByAmount } from "../Redux/counterSlice";
+export default function Counter() {
+  // props.increment();
+  // const count = useSelector((state) => state.counter.count);
+  const [incrementAmount, setIncrementAmount] = useState(0);
+  const dispatch = useDispatch();
   return (
     <div className="container">
-      {props.children}
-      <h2 id="count">{props.count}</h2>
+      <h2 id="count">{0}</h2>
+      <input
+        type="number"
+        value={incrementAmount}
+        onChange={(e) => setIncrementAmount(e.target.value)}
+        className="input"
+      />
       <div className="buttons">
-        {props.count < 10 ? (
-          <button onClick={props.increment} className="button">
-            Increment
-          </button>
-        ) : null}
-        {props.count > 0 ? (
-          <button
-            onClick={props.decrement}
-            disabled={props.count === 0}
-            className="button"
-          >
-            Decrement
-          </button>
-        ) : null}
+        <button onClick={() => dispatch(increment())} className="button">
+          Increment
+        </button>
+        <button onClick={() => dispatch(decrement())} className="button">
+          Decrement
+        </button>
+        {/* increment by */}
+        <button
+          onClick={() => dispatch(incrementByAmount(incrementAmount))}
+          className="button"
+        >
+          Increment by amount
+        </button>
       </div>
     </div>
   );

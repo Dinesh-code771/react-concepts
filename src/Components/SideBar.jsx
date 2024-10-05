@@ -1,19 +1,22 @@
 import React from "react";
-
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 export default function SideBar() {
+  // const count = useSelector((state) => state.counter.count);
+  const navigate = useNavigate();
   return (
     <>
       <div
         style={{
-          flex: 1,
+          flex: 0.2,
         }}
       >
         <aside
           style={{
-            backgroundColor: "white",
+            backgroundColor: "black",
             color: "black",
             padding: "1rem",
-
+            border: "1px solid white",
             height: "100vh",
             margin: "15px",
             borderRadius: "0.5rem",
@@ -31,52 +34,56 @@ export default function SideBar() {
             }}
           >
             <li>
-              <a
+              <Link
+                to="/"
                 style={{
-                  color: "black",
+                  color: "white",
                   textDecoration: "none",
                 }}
-                href="#"
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
+                to="/dinesh"
                 style={{
-                  color: "black",
+                  color: "white",
                   textDecoration: "none",
                 }}
-                href="#"
               >
-                About
-              </a>
+                Dinesh
+              </Link>
             </li>
             <li>
-              <a
+              <Link
+                to="/sunitha"
                 style={{
-                  color: "black",
+                  color: "white",
                   textDecoration: "none",
                 }}
-                href="#"
               >
-                Services
-              </a>
+                Sunitha
+              </Link>
             </li>
             <li>
-              <a
+              <Link
+                to="/counter"
                 style={{
-                  color: "black",
+                  color: "white",
                   textDecoration: "none",
                 }}
-                href="#"
               >
-                Contact
-              </a>
+                Counter
+              </Link>
             </li>
           </ul>
         </aside>
+        {"count:" + 0}
       </div>
+      {/* <button onClick={() => {
+        navigate("/settings");
+      }}>settings</button> */}
 
       {/* <div>
         <h1>second</h1>

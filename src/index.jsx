@@ -8,6 +8,8 @@ import Settings from "./Components/Settings";
 import ErrorComponent from "./Components/ErrorComponent";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Counter from "./Components/Counter";
+import Posts from "./Components/Posts";
+import loader from "./utils/loader";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -47,8 +49,9 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/post/:id",
-    element: <h1>Posts</h1>,
+    path: "/posts",
+    loader: loader,
+    element: <Posts />,
   },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));

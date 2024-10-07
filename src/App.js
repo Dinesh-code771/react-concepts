@@ -41,6 +41,7 @@ function App() {
     >
       {/* <NavBar/> */}
       <SideBar />
+      <AdminForm />
       <Outlet />
     </div>
   );

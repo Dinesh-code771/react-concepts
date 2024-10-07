@@ -77,6 +77,17 @@ export default function SideBar() {
                 Counter
               </Link>
             </li>
+            <li>
+              <Link
+                to="/Posts"
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                }}
+              >
+                Posts
+              </Link>
+            </li>
           </ul>
         </aside>
         {"count:" + 0}

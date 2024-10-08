@@ -10,6 +10,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Counter from "./Components/Counter";
 import Posts from "./Components/Posts";
 import loader from "./utils/loader";
+import List from "./Components/List";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/sunitha",
         element: <h1>Sunitha</h1>,
+      },
+      {
+        path: "/list",
+        element: <List />,
       },
     ],
   },

@@ -8,6 +8,7 @@ export default function SignupForm() {
     email: "",
     password: "",
   });
+  
   const [errors, setErrors] = useState({});
 
   // Yup schema definition for validation
@@ -35,6 +36,7 @@ export default function SignupForm() {
       setErrors({});
     } catch (err) {
       const validationErrors = {};
+      console.log(err);
       err.inner.forEach((error) => {
         validationErrors[error.path] = error.message;
       });

@@ -32,6 +32,22 @@ export default function List() {
     inputRef.current.focus();
   }, []);
 
+  function handleChnage(e) {
+    setNewName(e.target.value);
+  }
+  function makeRequest(name) {
+    console.log("making request", name);
+  }
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      makeRequest(newName);
+    }, 2000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [newName]);
+
   return (
     <div className="listContainer">
       <h1 className="listHeading">Names</h1>
@@ -43,9 +59,7 @@ export default function List() {
           placeholder="Enter Name"
           className="input"
           value={newName}
-          onChange={(e) => {
-            setNewName(e.target.value);
-          }}
+          onChange={handleChnage}
         />
 
         <h3>{count}</h3>
@@ -72,8 +86,8 @@ export default function List() {
       ) : (
         <ul className="lists">
           {emps.map((emp, index) => (
-            <div className="listWrapper">
-              <SingleList key={index} emp={emp} emps={emps} setemps={setemps} />
+            <div key={index} className="listWrapper">
+              <SingleList emp={emp} emps={emps} setemps={setemps} />
             </div>
           ))}
         </ul>

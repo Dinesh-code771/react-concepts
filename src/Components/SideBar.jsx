@@ -88,6 +88,17 @@ export default function SideBar() {
                 Posts
               </Link>
             </li>
+            <li>
+              <Link
+                to="/list"
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                }}
+              >
+                List
+              </Link>
+            </li>
           </ul>
         </aside>
         {"count:" + 0}

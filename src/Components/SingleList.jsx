@@ -3,28 +3,12 @@ import { useState } from "react";
 import { DataContext } from "../App";
 import { useContext } from "react";
 export default function SingleList({ emp, emps, setemps }) {
-  const value = useContext(DataContext);
   const [isEdit, setIsEdit] = useState(false);
   const [newName, setNewName] = useState(emp.name);
   return (
     <>
       <li className="list" key={emp.name}>
-        {isEdit ? (
-          <input
-            onChange={(e) => {
-              setNewName(e.target.value);
-            }}
-            className="input"
-            type="text"
-            value={newName}
-          />
-        ) : (
-          emp.name
-        )}
-        {value.state.count}
-        <button onClick={()=>{
-          value.dispatch({type:"increment"})
-        }}>+</button>
+        {isEdit ? <input value={""} className="input" type="text" /> : emp.name}
       </li>
       <button
         className="deleteButton"

@@ -8,6 +8,7 @@ export default function List() {
   const [emps, setemps] = useState([]);
   const inputRef = useRef(null);
   const [newName, setNewName] = useState("");
+  const [fetchToggle, setFetchToggle] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   //complext logic or logic that excute on a perticularstate state
@@ -16,17 +17,16 @@ export default function List() {
     return emps.length;
   }, [emps]);
 
+  //fetching users
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users"
-      );
+      const response = await fetch("http://localhost:3000/users");
       const data = await response.json();
       setemps(data);
       setIsLoading(false);
     }
     fetchData();
-  }, []);
+  }, [fetchToggle]);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -48,6 +48,26 @@ export default function List() {
     };
   }, [newName]);
 
+  async function sendNameToTheServer() {
+    if (newName === "") {
+      alert("Please enter a name");
+      return;
+    }
+    const res = await fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: emps.length + 1,
+        name: newName,
+      }),
+    });
+    const data = await res.json();
+    setFetchToggle(!fetchToggle);
+    setNewName("");
+  }
+
   return (
     <div className="listContainer">
       <h1 className="listHeading">Names</h1>
@@ -64,19 +84,7 @@ export default function List() {
 
         <h3>{count}</h3>
         {/* button */}
-        <button
-          className="button"
-          onClick={() => {
-            setemps([
-              ...emps,
-              {
-                name: newName,
-                age: 20,
-              },
-            ]);
-            setNewName("");
-          }}
-        >
+        <button className="button" onClick={sendNameToTheServer}>
           +
         </button>
       </div>
@@ -87,7 +95,13 @@ export default function List() {
         <ul className="lists">
           {emps.map((emp, index) => (
             <div key={index} className="listWrapper">
-              <SingleList emp={emp} emps={emps} setemps={setemps} />
+              <SingleList
+                fetchToggle={fetchToggle}
+                setFetchToggle={setFetchToggle}
+                emp={emp}
+                emps={emps}
+                setemps={setemps}
+              />
             </div>
           ))}
         </ul>

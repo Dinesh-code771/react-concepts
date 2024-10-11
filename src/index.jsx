@@ -2,15 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
+import { Suspense } from "react";
 import store from "./Redux/store";
 import { Provider } from "react-redux";
 import Settings from "./Components/Settings";
 import ErrorComponent from "./Components/ErrorComponent";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Counter from "./Components/Counter";
 import Posts from "./Components/Posts";
 import loader from "./utils/loader";
 import List from "./Components/List";
+const LazyComponent = React.lazy(() => import("./Components/Counter"));
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,7 +28,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/counter",
-        element: <Counter />,
+
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            {" "}
+            <LazyComponent />{" "}
+          </Suspense>
+        ),
       },
       {
         path: "/sunitha",

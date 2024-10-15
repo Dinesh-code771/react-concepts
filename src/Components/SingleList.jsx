@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { DataContext } from "../App";
 import { useContext } from "react";
+import axios from "axios";
 export default function SingleList({
   emp,
   emps,
@@ -12,27 +13,44 @@ export default function SingleList({
   const [isEdit, setIsEdit] = useState(false);
   const [newName, setNewName] = useState(emp.name);
   async function deleteEmp() {
-    const res = await fetch(`http://localhost:3000/users/${parseInt(emp.id)}`, {
-      method: "DELETE",
-    });
-    if (res.status === 200) {
-      console.log("deleted from server");
-      setFetchToggle(!fetchToggle);
+    // const res = await fetch(`http://localhost:3000/users/${parseInt(emp.id)}`, {
+    //   method: "DELETE",
+    // });
+    try {
+      const res = await axios.delete(
+        `http://localhost:3000/users/${parseInt(emp.id)}`
+      );
+      if (res.status === 200) {
+        console.log("edited in server");
+        setFetchToggle(!fetchToggle);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 
   async function editEmp() {
     setIsEdit(!isEdit);
-    const res = await fetch(`http://localhost:3000/users/${parseInt(emp.id)}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name: newName }),
-    });
-    if (res.status === 200) {
-      console.log("edited in server");
-      setFetchToggle(!fetchToggle);
+    // const res = await fetch(`http://localhost:3000/users/${parseInt(emp.id)}`, {
+    //   method: "PUT",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ name: newName }),
+    // });
+
+    try {
+      const updatedEmp = { name: newName };
+      const res = await axios.put(
+        `http://localhost:3000/users/${parseInt(emp.id)}`,
+        updatedEmp
+      );
+      if (res.status === 200) {
+        console.log("edited in server");
+        setFetchToggle(!fetchToggle);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
   return (

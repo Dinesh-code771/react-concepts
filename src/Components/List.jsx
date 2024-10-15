@@ -3,7 +3,7 @@ import { useState } from "react";
 import "../Styles/List.css";
 import SingleList from "./SingleList";
 import { useReducer } from "react";
-
+import axios from "axios";
 export default function List() {
   const [emps, setemps] = useState([]);
   const inputRef = useRef(null);
@@ -20,8 +20,10 @@ export default function List() {
   //fetching users
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:3000/users");
-      const data = await response.json();
+      // const response = await fetch("http://localhost:3000/users");
+      // const data = await response.json();
+      const response = await axios.get("http://localhost:3000/users");
+      const data = response.data;
       setemps(data);
       setIsLoading(false);
     }
@@ -53,17 +55,22 @@ export default function List() {
       alert("Please enter a name");
       return;
     }
-    const res = await fetch("http://localhost:3000/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: emps.length + 1,
-        name: newName,
-      }),
-    });
-    const data = await res.json();
+    // const res = await fetch("http://localhost:3000/users", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     id: emps.length + 1,
+    //     name: newName,
+    //   }),
+    // });
+    // const data = await res.json();
+    const newEmp = {
+      id: emps.length + 1,
+      name: newName,
+    };
+    const response = await axios.post("http://localhost:3000/users", newEmp);
     setFetchToggle(!fetchToggle);
     setNewName("");
   }

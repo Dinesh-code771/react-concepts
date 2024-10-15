@@ -1,30 +1,39 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
-
+import { useForm } from "../hooks/useForm";
 export default function SignupForm() {
   // Initial form values and state
-  const [formValues, setFormValues] = useState({
+  // const [formValues, setFormValues] = useState({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  // });
+  const { values: formValues, handleChange } = useForm({
     name: "",
     email: "",
     password: "",
   });
-  
+
   const [errors, setErrors] = useState({});
 
   // Yup schema definition for validation
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
-    email: Yup.string().email("Invalid email format").required("Email is required"),
-    password: Yup.string().min(6, "Password must be at least 6 characters long").required("Password is required"),
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters long")
+      .required("Password is required"),
   });
 
-  // Handle input change
-  const handleChange = (e) => {
-    setFormValues({
-      ...formValues,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // // Handle input change
+  // const handleChange = (e) => {
+  //   setFormValues({
+  //     ...formValues,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   // Handle form submission and validation
   const handleSubmit = async (e) => {
@@ -40,7 +49,7 @@ export default function SignupForm() {
       err.inner.forEach((error) => {
         validationErrors[error.path] = error.message;
       });
-      console.log("Form is invalid!",validationErrors);
+      console.log("Form is invalid!", validationErrors);
       setErrors(validationErrors); // Set validation errors in state
     }
   };

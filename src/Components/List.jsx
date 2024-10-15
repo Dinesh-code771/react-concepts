@@ -3,32 +3,21 @@ import { useState } from "react";
 import "../Styles/List.css";
 import SingleList from "./SingleList";
 import { useReducer } from "react";
+import useGetData from "../hooks/useGetData";
 import axios from "axios";
 export default function List() {
-  const [emps, setemps] = useState([]);
   const inputRef = useRef(null);
   const [newName, setNewName] = useState("");
   const [fetchToggle, setFetchToggle] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
+ 
+  //fetch data 
+  const {data:emps,isLoading} = useGetData("http://localhost:3000/users",fetchToggle);
   //complext logic or logic that excute on a perticularstate state
   const count = useMemo(() => {
     console.log("runnind");
     return emps.length;
   }, [emps]);
 
-  //fetching users
-  useEffect(() => {
-    async function fetchData() {
-      // const response = await fetch("http://localhost:3000/users");
-      // const data = await response.json();
-      const response = await axios.get("http://localhost:3000/users");
-      const data = response.data;
-      setemps(data);
-      setIsLoading(false);
-    }
-    fetchData();
-  }, [fetchToggle]);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -107,7 +96,6 @@ export default function List() {
                 setFetchToggle={setFetchToggle}
                 emp={emp}
                 emps={emps}
-                setemps={setemps}
               />
             </div>
           ))}

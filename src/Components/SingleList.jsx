@@ -6,7 +6,6 @@ import axios from "axios";
 export default function SingleList({
   emp,
   emps,
-  setemps,
   setFetchToggle,
   fetchToggle,
 }) {

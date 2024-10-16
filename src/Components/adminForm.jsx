@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
-import { useForm } from "../hooks/useForm";
+import useForm from "../hooks/useForm";
+import axios from "axios";
 export default function SignupForm() {
   // Initial form values and state
   // const [formValues, setFormValues] = useState({
@@ -27,6 +28,18 @@ export default function SignupForm() {
       .required("Password is required"),
   });
 
+  async function handleLogin() {
+    // const res = await axios.post("http://localhost:3001/login", {
+    //   email: formValues.email,
+    //   password: formValues.password,
+    // });
+
+    // const data = res.data;
+    // const token = data.token;
+
+    localStorage.setItem("token", "sagsagg");
+  }
+
   // // Handle input change
   // const handleChange = (e) => {
   //   setFormValues({
@@ -42,6 +55,7 @@ export default function SignupForm() {
       // Validate form values with Yup
       await validationSchema.validate(formValues, { abortEarly: false });
       console.log("Form is valid!");
+      handleLogin();
       setErrors({});
     } catch (err) {
       const validationErrors = {};

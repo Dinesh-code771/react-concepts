@@ -11,6 +11,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Posts from "./Components/Posts";
 import loader from "./utils/loader";
 import List from "./Components/List";
+import Otp from "./Components/Otp";
+import AdminForm from "./Components/AdminForm";
+import ProtectedRoute from "./Components/ProtectedRoute";
 const LazyComponent = React.lazy(() => import("./Components/Counter"));
 const router = createBrowserRouter([
   {
@@ -24,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dinesh",
-        element: <h1>Dinesh</h1>,
+        element: <Otp />,
       },
       {
         path: "/counter",
@@ -63,7 +66,11 @@ const router = createBrowserRouter([
   {
     path: "/posts",
     loader: loader,
-    element: <Posts />,
+    element: <ProtectedRoute element={<Posts />} />,
+  },
+  {
+    path: "/login",
+    element: <AdminForm />,
   },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));

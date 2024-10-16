@@ -10,7 +10,7 @@ import FunctionMemo from "./Components/FunctionMemo";
 import { createContext, useContext } from "react";
 import { useReducer } from "react";
 import UserForm from "./Components/UserForm";
-import AdminForm from "./Components/adminForm";
+import AdminForm from "./Components/AdminForm";
 import Model from "./Components/Model";
 import React from "react";
 import DataDisplayWithLoading from "./Components/DataDisplay";

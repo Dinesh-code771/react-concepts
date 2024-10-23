@@ -99,6 +99,17 @@ export default function SideBar() {
                 List
               </Link>
             </li>
+            <li>
+              <Link
+                to="/formik"
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                }}
+              >
+                formik
+              </Link>
+            </li>
           </ul>
         </aside>
         {"count:" + 0}

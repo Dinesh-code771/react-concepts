@@ -3,12 +3,7 @@ import * as Yup from "yup";
 import useForm from "../hooks/useForm";
 import axios from "axios";
 export default function SignupForm() {
-  // Initial form values and state
-  // const [formValues, setFormValues] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  // });
+
   const { values: formValues, handleChange } = useForm({
     name: "",
     email: "",
@@ -17,7 +12,6 @@ export default function SignupForm() {
 
   const [errors, setErrors] = useState({});
 
-  // Yup schema definition for validation
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     email: Yup.string()
@@ -40,15 +34,6 @@ export default function SignupForm() {
     localStorage.setItem("token", "sagsagg");
   }
 
-  // // Handle input change
-  // const handleChange = (e) => {
-  //   setFormValues({
-  //     ...formValues,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
-  // Handle form submission and validation
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

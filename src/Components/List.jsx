@@ -5,19 +5,40 @@ import SingleList from "./SingleList";
 import { useReducer } from "react";
 import useGetData from "../hooks/useGetData";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 export default function List() {
   const inputRef = useRef(null);
   const [newName, setNewName] = useState("");
   const [fetchToggle, setFetchToggle] = useState(false);
- 
-  //fetch data 
-  const {data:emps,isLoading} = useGetData("http://localhost:3000/users",fetchToggle);
+
+  const fetchUsers = async () => {
+    const response = await axios.get("http://localhost:8000/users");
+    const data = response.data;
+    return data;
+  };
+  //fetch data
+  // const { data: emps, isLoading } = useGetData(
+  //   "http://localhost:8000/users",
+  //   fetchToggle
+  // );
+
+  const {
+    data: emps,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: fetchUsers,
+    onSuccess: (data) => {
+      console.log("Data fetched successfully:", data);
+    },
+  });
+
+  console.log(isLoading,"sd")
   //complext logic or logic that excute on a perticularstate state
   const count = useMemo(() => {
-    console.log("runnind");
-    return emps.length;
+    return emps?.length;
   }, [emps]);
-
 
   useEffect(() => {
     inputRef.current.focus();
@@ -27,7 +48,7 @@ export default function List() {
     setNewName(e.target.value);
   }
   function makeRequest(name) {
-    console.log("making request", name);
+    // console.log("making request", name);
   }
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -59,7 +80,7 @@ export default function List() {
       id: emps.length + 1,
       name: newName,
     };
-    const response = await axios.post("http://localhost:3000/users", newEmp);
+    const response = await axios.post("http://localhost:8000/users", newEmp);
     setFetchToggle(!fetchToggle);
     setNewName("");
   }

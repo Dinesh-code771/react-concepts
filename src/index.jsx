@@ -14,6 +14,9 @@ import List from "./Components/List";
 import Otp from "./Components/Otp";
 import AdminForm from "./Components/AdminForm";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import FormikForm from "./Components/FormikForm";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 const LazyComponent = React.lazy(() => import("./Components/Counter"));
 const router = createBrowserRouter([
   {
@@ -72,10 +75,17 @@ const router = createBrowserRouter([
     path: "/login",
     element: <AdminForm />,
   },
+  {
+    path: "/formik",
+    element: <FormikForm />,
+  },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const queryClient = new QueryClient();
 root.render(
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </QueryClientProvider>
 );

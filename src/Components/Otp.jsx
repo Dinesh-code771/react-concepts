@@ -3,9 +3,9 @@ import OtpComponent from "./OtpComponent";
 import "../Styles/otp.css";
 export default function Otp() {
   function handleSubmit(otp) {
+    console.log("handleSubmit");
     console.log(otp);
   }
-
 
   return (
     <div className="containerWrapper">
@@ -13,4 +13,4 @@ export default function Otp() {
     </div>
   );
 }
-// Compare this snippet from my-app/src/Components/Settings.jsx:    
+// Compare this snippet from my-app/src/Components/Settings.jsx:

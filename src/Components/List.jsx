@@ -4,13 +4,14 @@ import "../Styles/List.css";
 import SingleList from "./SingleList";
 import { useReducer } from "react";
 import useGetData from "../hooks/useGetData";
+import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 export default function List() {
   const inputRef = useRef(null);
   const [newName, setNewName] = useState("");
   const [fetchToggle, setFetchToggle] = useState(false);
-
+  const queryClient = useQueryClient();
   const fetchUsers = async () => {
     const response = await axios.get("http://localhost:8000/users");
     const data = response.data;
@@ -22,19 +23,59 @@ export default function List() {
   //   fetchToggle
   // );
 
+  async function sendNameToTheServer() {
+    if (newName === "") {
+      alert("Please enter a name");
+      return;
+    }
+
+    const newEmp = {
+      id: emps.length + 1,
+      name: newName,
+    };
+    const response = await axios.post("http://localhost:8000/users", newEmp);
+    queryClient.invalidateQueries(["users"]);
+    setNewName("");
+  }
+
   const {
     data: emps,
     error,
     isLoading,
+    isError,
+    isSuccess,
   } = useQuery({
     queryKey: ["users"],
     queryFn: fetchUsers,
-    onSuccess: (data) => {
-      console.log("Data fetched successfully:", data);
-    },
+  });
+  // const teamsQuery = useQuery({ queryKey: ["teams"], queryFn: fetchTeams });
+
+  // const { data: user } = useQuery({
+  //   queryKey: ["user", email],
+  //   queryFn: getUserByEmail,
+  // });
+
+  // const userId = user?.id;
+
+  // const {
+  //   status,
+  //   fetchStatus,
+  //   data: projects,
+  // } = useQuery({
+  //   queryKey: ["projects", userId],
+  //   queryFn: getProjectsByUserId,
+  //   enabled: !!userId,
+  // });
+
+  const mutation = useMutation({
+    mutationFn: sendNameToTheServer,
   });
 
-  console.log(isLoading,"sd")
+  useEffect(() => {
+    if (isSuccess) {
+      console.log("Data fetched successfully");
+    }
+  }, [isSuccess]);
   //complext logic or logic that excute on a perticularstate state
   const count = useMemo(() => {
     return emps?.length;
@@ -60,31 +101,6 @@ export default function List() {
     };
   }, [newName]);
 
-  async function sendNameToTheServer() {
-    if (newName === "") {
-      alert("Please enter a name");
-      return;
-    }
-    // const res = await fetch("http://localhost:3000/users", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     id: emps.length + 1,
-    //     name: newName,
-    //   }),
-    // });
-    // const data = await res.json();
-    const newEmp = {
-      id: emps.length + 1,
-      name: newName,
-    };
-    const response = await axios.post("http://localhost:8000/users", newEmp);
-    setFetchToggle(!fetchToggle);
-    setNewName("");
-  }
-
   return (
     <div className="listContainer">
       <h1 className="listHeading">Names</h1>
@@ -101,7 +117,12 @@ export default function List() {
 
         <h3>{count}</h3>
         {/* button */}
-        <button className="button" onClick={sendNameToTheServer}>
+        <button
+          className="button"
+          onClick={() => {
+            mutation.mutate();
+          }}
+        >
           +
         </button>
       </div>

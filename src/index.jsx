@@ -16,7 +16,8 @@ import AdminForm from "./Components/AdminForm";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import FormikForm from "./Components/FormikForm";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Container from "./Components/Container";
 const LazyComponent = React.lazy(() => import("./Components/Counter"));
 const router = createBrowserRouter([
   {
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/sunitha",
-        element: <h1>Sunitha</h1>,
+        element: <Container />,
       },
       {
         path: "/list",
@@ -87,5 +88,6 @@ root.render(
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
+    <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
 );

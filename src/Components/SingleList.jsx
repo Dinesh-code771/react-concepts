@@ -2,31 +2,32 @@ import React from "react";
 import { useState } from "react";
 import { DataContext } from "../App";
 import { useContext } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-export default function SingleList({
-  emp,
-  emps,
-  setFetchToggle,
-  fetchToggle,
-}) {
+export default function SingleList({ emp, emps, setFetchToggle, fetchToggle }) {
   const [isEdit, setIsEdit] = useState(false);
   const [newName, setNewName] = useState(emp.name);
+  const queryClient = useQueryClient();
   async function deleteEmp() {
     // const res = await fetch(`http://localhost:3000/users/${parseInt(emp.id)}`, {
     //   method: "DELETE",
     // });
     try {
       const res = await axios.delete(
-        `http://localhost:3000/users/${parseInt(emp.id)}`
+        `http://localhost:8000/users/${parseInt(emp.id)}`
       );
       if (res.status === 200) {
         console.log("edited in server");
-        setFetchToggle(!fetchToggle);
+        queryClient.invalidateQueries(["users"]);
       }
     } catch (err) {
       console.log(err);
     }
   }
+
+  const mutation = useMutation({
+    mutationFn: deleteEmp,
+  });
 
   async function editEmp() {
     setIsEdit(!isEdit);
@@ -68,7 +69,13 @@ export default function SingleList({
           emp.name
         )}
       </li>
-      <button className="deleteButton" onClick={deleteEmp}>
+      <button
+        disabled={mutation.isPending}
+        className={` ${mutation.isPending ? "deleteButton" : ""}`}
+        onClick={() => {
+          mutation.mutate();
+        }}
+      >
         Delete
       </button>
       <button className="editButton" onClick={editEmp}>

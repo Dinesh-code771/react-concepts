@@ -1,28 +1,52 @@
-import React, { useState, useMemo, useCallback } from "react";
-import { DataContext } from "../App";
-import { useContext } from "react";
-function SmallExample() {
-  const [count, setCount] = useState(0);
-  const [name, setName] = useState("");
-  const value = useContext(DataContext);
-  // Using useMemo for expensive calculation
-  const doubleCount = useMemo(() => {
-    console.log("Expensive calculation running...");
-    return count * 2;
-  }, [count]);
-
-  // Using useCallback for function memoization
-  const handleNameChange = useCallback((event) => {
-    setName(event.target.value);
-  }, []);
-
+import React from "react";
+import { CiUser } from "react-icons/ci";
+import { IoBagOutline } from "react-icons/io5";
+import { FaRegHeart } from "react-icons/fa";
+import { CiSearch } from "react-icons/ci";
+import "../Styles/Navbar.css";
+export default function Navbar() {
   return (
-    <div>
-      <p>Count: {count}</p>
-      {value.age}
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-    </div>
+    <nav className="navbar">
+      <div className="elements">
+        <div className="leftElements">
+          <div className="logo">
+            <img src="/myntra logo.png" alt="" />
+          </div>
+          <div className="details">
+            <u1 className="list">
+              <li>MEN</li>
+              <li>WOMEN</li>
+              <li>KIDS</li>
+              <li>HOME & LIVING</li>
+              <li>BEAUTY</li>
+              <li>STUDIO</li>
+            </u1>
+          </div>
+        </div>
+        <div className="rightElements">
+          <div className="search">
+            <CiSearch size={15}/>
+            <input
+              type="text"
+              placeholder="Search for products, brands and more"
+            />
+          </div>
+          <div className="icons">
+            <div className="icon">
+              <CiUser size={15} />
+              <p>Profile</p>
+            </div>
+            <div className="icon">
+              <FaRegHeart size={15} />
+              <p>Wishlist</p>
+            </div>
+            <div className="icon">
+              <IoBagOutline size={15} />
+              <p>cart</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 }
-
-export default SmallExample;

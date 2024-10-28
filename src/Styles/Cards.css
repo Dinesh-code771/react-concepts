@@ -1,0 +1,71 @@
+.categoryContainer {
+  margin-top: 2rem;
+  padding: 10px;
+}
+.catgoryHeading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 1rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.cardsWrraper {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+.card {
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+}
+.card:hover {
+  transform: scale(1.05);
+}
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner {
+  position: absolute;
+  bottom: 0;
+  background-color: #e11256;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: center;
+  padding: 0.5rem;
+  align-items: center;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bolder;
+}
+
+.banner h1 {
+  font-size: 1.2rem;
+}
+.banner p {
+  font-size: 2rem;
+}
+.banner h3 {
+  font-size: 1.2rem;
+}

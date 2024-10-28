@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 export default function MultiSearch({
   options,
-  searchInputRef: searchInput,
   selectedValues,
   setSelectedValues,
 }) {
   const [searchValue, setSearchValue] = useState("");
   const [currentOption, setCurrentOption] = useState(0);
   const [filteredOptions, setFilteredOptions] = useState(options);
-
+  const searchInput = useRef(null);
   useEffect(() => {
     searchInput.current.focus();
     setFilteredOptions(
@@ -21,9 +20,17 @@ export default function MultiSearch({
 
   function handleKeyDown(e) {
     console.log(e.key);
-    if (e.key === "ArrowDown") {
+    if (e.key === "ArrowUp" && currentOption === 0) {
+      //   console.log("currentOption", filteredOptions.length - 1);
+      setCurrentOption(filteredOptions.length - 1);
+    } else if (
+      e.key === "ArrowDown" &&
+      currentOption === filteredOptions.length - 1
+    ) {
+      setCurrentOption(0);
+    } else if (e.key === "ArrowDown") {
       setCurrentOption((currentOption) => currentOption + 1);
-    } else if (e.key === "ArrowUp") {
+    } else if (e.key === "ArrowUp" && currentOption > 0) {
       setCurrentOption((currentOption) => currentOption - 1);
     } else if (e.key === "Enter") {
       setSelectedValues((selectedValues) => [
@@ -32,11 +39,13 @@ export default function MultiSearch({
       ]);
     }
   }
+
   return (
     <div
       onClick={(e) => {
         e.stopPropagation();
       }}
+      style={{ top: `${selectedValues?.length ? "54%" : "100%"} ` }}
       className="options"
     >
       <div className="searchWrapper">
@@ -51,18 +60,6 @@ export default function MultiSearch({
         />
       </div>
       <div className="values">
-        {/* <div className="valueWrapper">
-          <input type="checkbox" id="dinesh" />
-          <label htmlFor="dinesh">Dinesh</label>
-        </div>
-        <div className="valueWrapper">
-          <input type="checkbox" id="dinesh" />
-          <label htmlFor="dinesh">ravi</label>
-        </div>
-        <div className="valueWrapper">
-          <input type="checkbox" id="dinesh" />
-          <label htmlFor="dinesh">sunitha</label>
-        </div> */}
         {filteredOptions.map((option, index) => (
           <div
             key={index}

@@ -2,29 +2,33 @@ import React, { useEffect, useRef } from "react";
 import "../Styles/MultiSelect.css";
 import { useState } from "react";
 import MultiSearch from "./MultiSearch";
-export default function MultiSelect({ placeholder }) {
+export default function MultiSelect({ placeholder, options }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValues, setSelectedValues] = useState([]);
   const multiInput = useRef(null);
-  const searchInput = useRef(null);
   useEffect(() => {
     window.addEventListener("click", (e) => {
-      if (
-        multiInput.current.contains(e.target) ||
-        (searchInput.current ? searchInput.current.contains(e.target) : false)
-      ) {
-        console.log(multiInput.current.contains(e.target));
-        setIsOpen(true);
-      } else {
-        setIsOpen(false);
-      }
+      setIsOpen(false);
     });
   }, []);
+
+  function handleRemove(value) {
+    return () => {
+      setSelectedValues((selectedValues) =>
+        selectedValues.filter((val) => val !== value)
+      );
+    };
+  }
 
   return (
     <div className="wrapper">
       <div className="inputWrapper">
         <input
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsOpen(!isOpen);
+          }}
+          disabled={isOpen}
           ref={multiInput}
           className="multi"
           type="text"
@@ -32,19 +36,30 @@ export default function MultiSelect({ placeholder }) {
         />
       </div>
       <div className="selectedValues">
-        {selectedValues.map((value, index) => (
-          <div key={index} className="selectedValue">
-            {value}
+        {selectedValues.slice(0, 2).map((value, index) => (
+          <div className="tagWrapper selectedValue">
+            <div key={index} className="tag">
+              {value}
+            </div>
+            <span onClick={handleRemove(value)} className="cross">
+              x
+            </span>
           </div>
         ))}
+        {selectedValues.length > 2 ? (
+          <div className="tagWrapper selectedValue">
+            <div className="tag">+{selectedValues.length - 2}</div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
 
       {isOpen ? (
         <MultiSearch
           setSelectedValues={setSelectedValues}
           selectedValues={selectedValues}
-          searchInputRef={searchInput}
-          options={["Dinesh", "Sunitha", "Ravi"]}
+          options={options}
         />
       ) : (
         ""

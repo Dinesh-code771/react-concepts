@@ -9,6 +9,9 @@
   padding: 10px;
   font-size: 16px;
   border-radius: 8px;
+  display: flex;
+  background-color: antiquewhite;
+  color: black;
 }
 .options {
   width: 80%;
@@ -16,7 +19,6 @@
   color: black;
   padding: 10px;
   position: absolute;
-  top: 60%;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -61,11 +63,11 @@
   outline: none;
 }
 
-.values{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-left: 5px;
+.values {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 5px;
 }
 
 .valueWrapper {
@@ -76,7 +78,18 @@
   padding: 10px;
 }
 
-.active{
-    background-color: lightblue;
+.active {
+  background-color: lightblue;
+}
 
+.tagWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+.cross {
+  cursor: pointer;
 }

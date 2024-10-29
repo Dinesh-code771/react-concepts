@@ -1,6 +1,10 @@
 .categoryContainer {
   margin-top: 2rem;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .catgoryHeading {
   font-size: 1.5rem;
@@ -18,6 +22,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+  width: 50%;
 }
 .card {
   width: 300px;

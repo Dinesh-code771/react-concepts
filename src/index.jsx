@@ -7,12 +7,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./Components/App";
 import "./index.css";
 import store from "./Redux/store";
+import ProductCategory from "./Components/ProductCategory";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <>Error</>,
+    // errorElement: <>Error</>,
     // children: [
     //   {
     //     path: "/",
@@ -43,18 +44,8 @@ const router = createBrowserRouter([
     // ],
   },
   {
-    path: "/category",
-    element: <>category</>,
-    children: [
-      {
-        path: "/category/",
-        element: <h1>Settings</h1>,
-      },
-      {
-        path: "/category/:[id]",
-        element: <h1>Profile</h1>,
-      },
-    ],
+    path: "/product/:category",
+    element: <ProductCategory />,
   },
   // ],
   // },

@@ -4,12 +4,19 @@ import { IoBagOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import "../Styles/Navbar.css";
-export default function Navbar() {
+import { useNavigate } from "react-router-dom";
+export default function Navbar({ setSearchValue, searchValue }) {
+  const navigate = useNavigate();
   return (
     <nav className="navbar">
       <div className="elements">
         <div className="leftElements">
-          <div className="logo">
+          <div
+            onClick={() => {
+              navigate("/");
+            }}
+            className="logo"
+          >
             <img src="/myntra logo.png" alt="" />
           </div>
           <div className="details">
@@ -25,9 +32,11 @@ export default function Navbar() {
         </div>
         <div className="rightElements">
           <div className="search">
-            <CiSearch size={15}/>
+            <CiSearch size={15} />
             <input
               type="text"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
               placeholder="Search for products, brands and more"
             />
           </div>

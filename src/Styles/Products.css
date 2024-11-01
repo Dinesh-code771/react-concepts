@@ -3,13 +3,14 @@
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 20px;
+  padding : 20px;
 }
 
 .filter {
-  flex: 1;
+  flex: 2;
 }
 .productsWrapper {
-  flex: 9;
+  flex: 8;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

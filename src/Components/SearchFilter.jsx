@@ -8,6 +8,7 @@ export default function SearchFilter({
   heading,
   isSingle,
   filters,
+  filterTags,
 }) {
   const [searchValue, setSearchValue] = React.useState("");
 
@@ -25,6 +26,7 @@ export default function SearchFilter({
     const filteredData = data?.filter((product) => {
       return product.toLowerCase().includes(searchValue.toLowerCase());
     });
+
     setCategoryProducts(filteredData);
   }, [searchValue]);
 
@@ -70,10 +72,14 @@ export default function SearchFilter({
             <div className="item">
               <input
                 onChange={(e) => {
-                  if (!isSingle) onChange(category, e.target.checked);
-                  else onChange(category, true);
+                  if (!isSingle) onChange(category, e.target.checked, isSingle);
+                  else onChange(category, true, isSingle);
                 }}
-                checked={filters.includes(category.toLowerCase())}
+                checked={
+                  isSingle
+                    ? filterTags.includes(category)
+                    : filters.includes(category.toLowerCase())
+                }
                 id={category}
                 type={isSingle ? "radio" : "checkbox"}
               />

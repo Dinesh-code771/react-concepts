@@ -32,6 +32,7 @@ async function fetchProducts(category) {
 export default function ProductCategory() {
   let { category } = useParams();
   const [filters, setFilters] = useState([category]);
+  const [filterTags, setFilterTags] = useState([]);
 
   const [searchValue, setSearchValue] = React.useState("");
 
@@ -49,20 +50,25 @@ export default function ProductCategory() {
   }, [data]);
 
   useEffect(() => {
-    const filteredData = data?.filter((product) => {
+    const filteredData = data?.data?.products?.filter((product) => {
       return product.title.toLowerCase().includes(searchValue.toLowerCase());
     });
     setCategoryProducts(filteredData);
   }, [searchValue]);
 
   useEffect(() => {
-    const filteredData = data?.data?.products.filter((product) => {
-      console.log(product.category);
-      return filters.includes(product.category.toLowerCase());
-    });
-    console.log(filteredData, filters);
+    const filteredData = data?.data?.products
+      .filter((product) => {
+        console.log(product.category);
+        return filters.includes(product.category.toLowerCase());
+      })
+      .filter((product) => {
+        if (filterTags.length === 0) return true;
+        return product.tags?.includes(filterTags[0] ? filterTags[0] : "");
+      });
+    console.log(filteredData, filters, "sss");
     setCategoryProducts(filteredData);
-  }, [filters]);
+  }, [filters, filterTags]);
 
   return (
     <div>
@@ -73,13 +79,21 @@ export default function ProductCategory() {
             filters={filters}
             setFilters={setFilters}
             tags={data?.uniqueTags}
+            filterTags={filterTags}
+            setFilterTags={setFilterTags}
           />
         </div>
 
         <div className="productsWrapper">
           {isLoading && <CategoryProductLoader data={categoryProducts} />}
           {isError && <div>Error...</div>}
-          {data && <Products data={categoryProducts} />}
+          {data && (
+            <Products
+              data={categoryProducts}
+              filters={filters}
+              filterTags={filterTags || []}
+            />
+          )}
         </div>
       </div>
     </div>

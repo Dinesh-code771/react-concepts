@@ -1,11 +1,22 @@
 import React from "react";
 import ProductCart from "./ProductCart";
-export default function Products({ data }) {
+export default function Products({ data, filters, filtersTags }) {
   return (
-    <>
-      {data?.map((product) => {
-        return <ProductCart product={product} />;
-      })}
-    </>
+    <div className="containerWrapper">
+      <div className="tagsWrapper">
+        {[...filters]?.map((tag) => {
+          return (
+            <div className="tag">
+              <p>{tag}</p>
+            </div>
+          );
+        })}
+      </div>
+      <div className="cards">
+        {data?.map((product) => {
+          return <ProductCart product={product} />;
+        })}
+      </div>
+    </div>
   );
 }

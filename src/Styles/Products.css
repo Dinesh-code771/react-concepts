@@ -3,9 +3,38 @@
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 20px;
-  padding : 20px;
+  padding: 20px;
 }
-
+.containerWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 1rem;
+}
+.tagsWrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: start;
+  align-items: center;
+}
+.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #ff3f6c;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
 .filter {
   flex: 2;
 }

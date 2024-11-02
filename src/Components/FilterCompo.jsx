@@ -1,8 +1,24 @@
 import React from "react";
 import "../Styles/filter.css";
 import SearchFilter from "./SearchFilter";
-export default function FilterCompo({ filters, setFilters, tags }) {
-  function handleSelectedCategory(category, isChecked) {
+export default function FilterCompo({
+  filters,
+  setFilters,
+  tags,
+  filterTags,
+  setFilterTags,
+}) {
+  function handleSelectedCategory(category, isChecked, isSingle) {
+    if (isSingle) {
+      if (isChecked) {
+        console.log("category", category);
+        return setFilterTags([category]);
+      } else {
+        return setFilterTags(
+          filterTags.filter((filter) => filter !== category)
+        );
+      }
+    }
     if (isChecked) {
       setFilters([...filters, category.toLowerCase()]);
     } else {
@@ -22,7 +38,15 @@ export default function FilterCompo({ filters, setFilters, tags }) {
       <SearchFilter
         heading="tags"
         filters={filters}
-        data={tags || []}
+        filterTags={filterTags}
+        data={
+          tags?.filter((tag) => {
+            console.log(tag !== "beauty", "tag");
+            return !["beauty", "fragrances", "furniture", "groceries"].includes(
+              tag
+            );
+          }) || []
+        }
         isSearch={false}
         isSingle={true}
         onChange={handleSelectedCategory}

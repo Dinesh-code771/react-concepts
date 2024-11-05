@@ -1,61 +1,40 @@
 import React from "react";
-import { CiUser } from "react-icons/ci";
-import { IoBagOutline } from "react-icons/io5";
-import { FaRegHeart } from "react-icons/fa";
-import { CiSearch } from "react-icons/ci";
-import "../Styles/Navbar.css";
-import { useNavigate } from "react-router-dom";
-export default function Navbar({ setSearchValue, searchValue }) {
-  const navigate = useNavigate();
+import { FaGithubSquare } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa6";
+import { FaSquareXTwitter } from "react-icons/fa6";
+import { motion } from "framer-motion";
+export default function NavBar({ links }) {
   return (
-    <nav className="navbar">
-      <div className="elements">
-        <div className="leftElements">
-          <div
-            onClick={() => {
-              navigate("/");
-            }}
-            className="logo"
-          >
-            <img src="/myntra logo.png" alt="" />
-          </div>
-          <div className="details">
-            <u1 className="list">
-              <li>MEN</li>
-              <li>WOMEN</li>
-              <li>KIDS</li>
-              <li>HOME & LIVING</li>
-              <li>BEAUTY</li>
-              <li>STUDIO</li>
-            </u1>
-          </div>
-        </div>
-        <div className="rightElements">
-          <div className="search">
-            <CiSearch size={15} />
-            <input
-              type="text"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="Search for products, brands and more"
-            />
-          </div>
-          <div className="icons">
-            <div className="icon">
-              <CiUser size={15} />
-              <p>Profile</p>
-            </div>
-            <div className="icon">
-              <FaRegHeart size={15} />
-              <p>Wishlist</p>
-            </div>
-            <div className="icon">
-              <IoBagOutline size={15} />
-              <p>cart</p>
-            </div>
-          </div>
-        </div>
+    <motion.nav
+      animate={{
+        scale: [1, 1.03, 1],
+        transition: {
+          duration: 4,
+          repeat: Infinity,
+        },
+      }}
+      className="w-[80%] mx-auto flex justify-between rounded-md shadow-md p-5 bg-[#010127]"
+    >
+      <div className="logo">
+        <img src="assets/kevinRushLogo.png" alt="" height={30} width={30} />
       </div>
-    </nav>
+      <motion.div className="inline-flex gap-5">
+        {links.map((link, index) => (
+          <motion.div
+            key={index}
+            animate={{
+              y: [0, -3, 0],
+              transition: {
+                duration: 1,
+                delay: index * 0.1,
+                repeat: Infinity,
+              },
+            }}
+          >
+            {link.icon()}
+          </motion.div>
+        ))}
+      </motion.div>
+    </motion.nav>
   );
 }

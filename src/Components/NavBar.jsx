@@ -13,7 +13,7 @@ export default function NavBar({ links }) {
           repeat: Infinity,
         },
       }}
-      className="w-[80%] mx-auto flex justify-between rounded-md shadow-md p-5 bg-[#010127]"
+      className="w-[80%] relative z-40 mx-auto flex justify-between rounded-md shadow-md p-5 bg-[#010127]"
     >
       <div className="logo">
         <img src="assets/kevinRushLogo.png" alt="" height={30} width={30} />
@@ -21,6 +21,7 @@ export default function NavBar({ links }) {
       <motion.div className="inline-flex gap-5">
         {links.map((link, index) => (
           <motion.div
+            onClick={() => window.open(link.link, "_blank")}
             key={index}
             animate={{
               y: [0, -3, 0],

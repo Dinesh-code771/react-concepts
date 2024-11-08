@@ -36,7 +36,7 @@ export default function Contact() {
         "service_02qmmzv", // Service ID from EmailJS
         "template_4lcxnjo", // Template ID from EmailJS
         formData, // Form data to send
-        "B40H23OIbfgyVxxEm" // User ID from EmailJS
+        process.env.PUBLIC_KEY // User ID from EmailJS
       )
       .then(
         (response) => {

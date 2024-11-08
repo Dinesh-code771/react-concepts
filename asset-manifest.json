@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Dinesh-code771.github.io/react-concepts/static/css/main.ea1b5ac1.css",
+    "main.js": "/Dinesh-code771.github.io/react-concepts/static/js/main.d393a7e7.js",
+    "static/media/planet.svg": "/Dinesh-code771.github.io/react-concepts/static/media/planet.978dacb8fd1dd1902343d7c265278033.svg",
+    "static/media/rocket.svg": "/Dinesh-code771.github.io/react-concepts/static/media/rocket.cbfb45e4ead9519817c4d4565a73bd5b.svg",
+    "static/media/meteor.svg": "/Dinesh-code771.github.io/react-concepts/static/media/meteor.57846766016b9a5beb3b20efec260733.svg",
+    "index.html": "/Dinesh-code771.github.io/react-concepts/index.html",
+    "main.ea1b5ac1.css.map": "/Dinesh-code771.github.io/react-concepts/static/css/main.ea1b5ac1.css.map",
+    "main.d393a7e7.js.map": "/Dinesh-code771.github.io/react-concepts/static/js/main.d393a7e7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ea1b5ac1.css",
+    "static/js/main.d393a7e7.js"
+  ]
+}

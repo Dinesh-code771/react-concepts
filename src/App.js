@@ -53,16 +53,16 @@ const projects = [
       "Developed a scalable and responsive e-commerce platform, implementing features like product listings, shopping carts, and secure checkout processes.",
     techs: [techImages[2], techImages[3], techImages[4]], // select specific techs
     liveLink: "#",
-    videoSrc: "assets/projects/projectVideo2.mov",
+    videoSrc: "assets/projects/project4.mp4",
   },
   {
-    imgSrc: "assets/projects/project3 (1).mp4",
+    imgSrc: "assets/projects/project3.png",
     title: "Swiggy Clone",
     description:
       "Built a user-friendly food booking platform, enabling customers to browse menus,and add items to their cart.",
     techs: [techImages[0], techImages[4], techImages[5]], // select specific techs
     liveLink: "#",
-    videoSrc: "assets/projects/project4.mp4",
+    videoSrc: "assets/projects/project3 (1).mp4",
   },
 ];
 

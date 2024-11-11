@@ -56,13 +56,13 @@ const projects = [
     videoSrc: "assets/projects/projectVideo2.mov",
   },
   {
-    imgSrc: "assets/projects/project-3.png",
+    imgSrc: "assets/projects/project3.mp4",
     title: "Swiggy Clone",
     description:
       "Built a user-friendly food booking platform, enabling customers to browse menus,and add items to their cart.",
     techs: [techImages[0], techImages[4], techImages[5]], // select specific techs
     liveLink: "#",
-    videoSrc: "assets/projects/projectVideo2.mov",
+    videoSrc: "assets/projects/project4.mp4",
   },
 ];
 

@@ -56,7 +56,7 @@ const projects = [
     videoSrc: "assets/projects/projectVideo2.mov",
   },
   {
-    imgSrc: "assets/projects/project3.mp4",
+    imgSrc: "assets/projects/project3 (1).mp4",
     title: "Swiggy Clone",
     description:
       "Built a user-friendly food booking platform, enabling customers to browse menus,and add items to their cart.",

@@ -1,6 +1,16 @@
 import React from "react";
-import App from "./App";
 import ReactDOM from "react-dom";
 import "./index.css";
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+
+import { ChatSection } from "./components/ChatSection";
+import UsersList from "./components/UsersList";
+import ChatWrapper from "./components/ChatWrapper";
+import UserChatWindow from "./components/UserChatWindow";
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <ChatSection>
+    <ChatWrapper>
+      <UsersList />
+      <UserChatWindow />
+    </ChatWrapper>
+  </ChatSection>
+);

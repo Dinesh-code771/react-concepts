@@ -2,15 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-import { ChatSection } from "./components/ChatSection";
-import UsersList from "./components/UsersList";
-import ChatWrapper from "./components/ChatWrapper";
-import UserChatWindow from "./components/UserChatWindow";
+
+import AssesmentProvenClub from "./components/AssesmentProvenClub";
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ChatSection>
-    <ChatWrapper>
-      <UsersList />
-      <UserChatWindow />
-    </ChatWrapper>
-  </ChatSection>
+  <AssesmentProvenClub />
 );
